@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/injurymapping.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
+  
+	</head>
+	<body>
+		<script type="text/javascript">
+		// Sample function that returns boolean in case the browser is Internet Explorer 
+		function isIE() {
+		ua = navigator.userAgent;
+		
+		// MSIE used to detect old browsers and Trident used to newer ones
+
+		var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+		
+		return is_ie;
+		}
+		// Create an alert to show if the browser is IE or not 
+
+		
+		if (isIE()){
+		alert('You are using an unsupported browser. Please use the most recent version of Edge, Chrome, Safari, or Firefox.');
+		}
+		</script>
+		<script src="js/angular.js"></script>
+		<script src="js/injurymapping.js"></script>
+		 <script src="js/jquery-1.9.0.js"></script>
+		 <script src="js/bootstrap.min.js"></script>
+		  <script src="js/jquery-migrate-1.2.1.js"></script>
+		 <script src="js/ng-clipboard.js"></script>
+		<script src="js/jquery-ui.min.js" type="text/javascript"></script>
+		<div class="bright" ng-app="ratefast" ng-controller="InjuryMapping">
+			<section id="header-title">
+				<div class="section">
+					<div class="container">
+						<div class="row">
+							<div style="text-align: center;" class="col-sm-12">
+								<a href="https://rate-fast.com" target="_blank"><img src="https://blog.rate-fast.com/wp-content/uploads/2018/08/ratefast-banner-e1535058542728.jpg" class="img-fluid" style="max-width: 75%;" /></a>
+								<h6>
+								<h1>RateFast Injury Mapping</h1>
+								</h6>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="section">
+				<div class="container">
+					<div class="row bottomwhitspace ">
+						<div class="col-sm-11">
+							<h3 ng-hide="showheader">
+					
+							<p class="injuryheader">
+								<span class="contactus  " >Maximum Medical Improvement (MMI) is determined when all available treatment has been provided to an individual and no further improvement is anticipated for next year (365 days) with or without treatment.  </p>
+								<p class="injuryheader">This tool is intended to assist the user in determining when MMI has been clinically achieved. This tool is not a replacement for medical or clinical judgement. </p> 
+								
+								<p class="injuryheader">
+									<strong>
+										Please answer the below questions to map your injury.
+									</strong>
+								</p>
+								
+								</h3>
+								<div id="Calculation" ng-show="showMessage">
+									<h1> Results </h1>
+									<hr>
+									<h2>{{injuryresult }}</h2>
+									
+									<button ng-click="goback()" class="injurybutton">
+									 <span class="glyphicon glyphicon-arrow-left"></span> &nbsp; Go Back</button>
+									 &nbsp;&nbsp;
+									  <button ng-copy="injuryresult"  class="injurybutton"  id="copttxtbtn" data-content="Copied!" data-placement="bottom">
+									Copy to Clipboard &nbsp;<span class="glyphicon glyphicon-edit"></span></button>
+									&nbsp;&nbsp;
+									<button ng-click="reset(1)" class="injurybutton">
+									Calculate Again &nbsp;<span class="glyphicon glyphicon-arrow-right"></span></button>
+								</div>
+								
+								<div id="Questions" ng-show="!showMessage">
+								
+								<label for="q1">1. When did the injury occur? </label>
+									</br>
+									<label>
+										 <input type="text" id="datepicker"   class="form-group"/>
+										
+									</label>
+									<br/>
+								
+									<label for="q2"> 2. Are pain/symptoms still present?  </label>
+									</br>
+									<label>
+										<input type="radio" ng-model="Ans[1]"   name="que2" ng-value=1 ng-change="reset(3)" > Yes
+									</label>
+									<label>
+										<input type="radio" ng-model="Ans[1]"   name="que2" ng-value=0 ng-change="reset(3)"> No
+									</label>
+									
+									<br />
+									<br/>
+								
+									<label for="q3">3. Is the employee back to work at full duty? </label>
+									</br>
+									<label>
+										<input type="radio" ng-model="Ans[2]"  name="que3" ng-value=1 ng-change="reset(3)"> Yes
+									</label>
+									<label>
+										<input type="radio" ng-model="Ans[2]"  name="que3" ng-value=0 ng-change="reset(3)"> No
+									</label>
+									
+									<br />
+									<br/>
+								
+									<div ng-show="((Ans[1] >= 0 && Ans[2] >=0) && !(Ans[1] === 0 && Ans[2] ===1) )">
+										<label for="q4">4. Has a conservative trial of medications been provided for at least 2 weeks? </label>
+										</br>
+										<label>
+											<input type="radio" ng-model="Ans[3]"  name="que4" ng-value=4 ng-change="reset(4)"> Yes
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[3]"  name="que4" ng-value=0 ng-change="reset(4)"> No
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[3]"   name="que4" ng-value=5 ng-change="reset(4)"> Declined by patient 
+										</label>
+										&nbsp;
+										<label>
+											<input type="radio" ng-model="Ans[3]"  name="que4" ng-value=3 ng-change="reset(4)">  Denied by UR
+										</label>
+										<br />
+										<br/>
+									</div>
+								
+									<div ng-show="(Ans[3] == 4 ||Ans[3] == 5 ||Ans[3] == 3  )">
+										<label for="q5">5. Has a trial of therapy been provided for at least 6 visits? </label>
+										</br>
+										<label>
+											<input type="radio" ng-model="Ans[4]" name="que5"  ng-value=8 ng-change="reset(5)"> Yes
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[4]" name="que5"  ng-value=0 ng-change="reset(5)"> No
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[4]" name="que5"  ng-value=6 ng-change="reset(5)"> Declined by patient 
+										</label>
+										&nbsp;
+										<label>
+											<input type="radio" ng-model="Ans[4]" name="que5"  ng-value=7 ng-change="reset(5)">  Denied by UR
+										</label>
+										<br />
+										<br/>
+									</div>
+									
+									<div ng-show="(Ans[4] == 8 || Ans[4] == 6  || Ans[4] == 7)">
+										<label for="q5">6. Has diagnostic testing been performed?</label>
+										</br>
+										<label>
+											<input type="radio" ng-model="Ans[5]" name="que6"  ng-value=16 ng-change="reset(6)"> Yes
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[5]" name="que6"  ng-value=0 ng-change="reset(6)"> No
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[5]" name="que6"  ng-value=9 ng-change="reset(6)"> Declined by patient 
+										</label>
+										&nbsp;
+										<label>
+											<input type="radio" ng-model="Ans[5]" name="que6"  ng-value=10 ng-change="reset(6)">  Denied by UR
+										</label>
+										
+										<br />
+										<br/>
+									</div>
+									
+									<div ng-show="(Ans[5] == 16 ||Ans[5] == 9 ||Ans[5] == 10 )">
+										<label for="q2">7.  Has specialty consultation occurred?</label>
+										</br>
+										<label>
+											<input type="radio" ng-model="Ans[6]"  name="que7" ng-value=32 ng-change="reset(7)"> Yes
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[6]"  name="que7" ng-value=0 ng-change="reset(7)"> No
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[6]"   name="que7" ng-value=11 ng-change="reset(7)"> Declined by Patient 
+										</label>
+										&nbsp;
+										<label>
+											<input type="radio" ng-model="Ans[6]"   name="que7" ng-value=12 ng-change="reset(7)"> Denied by UR
+										</label>
+										<br />
+										<br/>
+									</div>
+								
+									<div ng-show="(Ans[6] == 32)">
+										<label for="q2">8. Did specialist recommend a surgery or intervention?  </label>
+										</br>
+										<label>
+											<input type="radio" ng-model="Ans[7]"  name="que8" ng-value=64 ng-change="reset(8)"> Yes
+										</label>
+										
+										
+										<label>
+											<input type="radio" ng-model="Ans[7]"  name="que8" ng-value=0 ng-change="reset(8)"> No
+										</label>
+										<br />
+										<br/>
+									</div>
+									
+									<div ng-show="(Ans[7] == 64)">
+										<label for="q2">9. Was surgery/intervention approved?</label>
+										</br>
+										<label>
+											<input type="radio" ng-model="Ans[8]" ng-value=64 name="que9" ng-change="reset(9)"> Approved
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[8]" ng-value=125 name="que9" ng-change="reset(9)"> Declined 
+										</label>
+										<label>
+											<input type="radio" ng-model="Ans[8]" ng-value=128 name="que9" ng-change="reset(9)">  Denied
+										</label>
+										
+										<label>
+											<input type="radio" ng-model="Ans[8]" ng-value=256 name="que9" ng-change="reset(9)"> Pending
+										</label>
+										<br />
+										<br/>
+									</div>
+									<br />
+									<button ng-show="(Ans[1] === 0 && Ans[2] === 1)
+									|| (Ans[3] === 0)
+									|| (Ans[4] === 0 ) || (Ans[5] ===0)
+									|| (Ans[6] ===0 ) || (Ans[6] ===11) || (Ans[6] ===12) || (Ans[7] === 0) || (Ans[8] > 0)
+									" ng-click ="injurycalculate()" class="injurybutton">Calculate</button>
+									
+										&nbsp;&nbsp;
+										
+									<button  ng-show="(Ans[1] === 0 && Ans[2] === 1)
+									|| (Ans[3] === 0)
+									|| (Ans[4] === 0 ) || (Ans[5] ===0)
+									|| (Ans[6] ===0 ) || (Ans[6] ===11) || (Ans[6] ===12) || (Ans[7] === 0) || (Ans[8] > 0)
+									"   ng-click ="pagereset()" class="injurybutton"  id="reset" >Reset</button>
+								</div>
+							
+							 </div>
+							 <div class="col-sm-1">
+							
+							 </p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
+	
+	<script>
+	$(function () {
+    $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true,
+		maxDate: new Date()
+    });
+});
+	</script>
+	
+	

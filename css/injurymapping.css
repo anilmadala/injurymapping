@@ -1,0 +1,34 @@
+ 
+.injurybutton {
+    background-color:black;
+    border: none;
+    color: white;
+    padding: 9px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+    display: inline-block;
+    width: 190px;
+    height: 40px;
+}
+
+.injuryheader{
+    font-size: 18px;
+    font-weight: normal;
+   
+}
+
+label {
+    font-size: 18px;
+}
+
+.bottomwhitspace{
+    padding-bottom:5.7rem;
+}
+.injurytexthighlight{
+    color:#428bca;
+}a:hover {  color: white !important;  text-decoration: none !important ;}
+
