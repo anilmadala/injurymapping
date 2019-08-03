@@ -24,7 +24,7 @@ angular.module('ratefast',['ng-clipboard'])
       $scope.Ans.push(-1);
     }
 	
-	
+	//anil set date value
 	$scope.goback=function(){
 		$scope.showMessage = false;
 		$scope.showheader=false;
