@@ -1,0 +1,12 @@
+name :Reusable workflow 1
+
+on :
+ workflow_call:
+
+jobs:
+  ru1-job1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name : write someting to log
+          echo " I am Anil"
