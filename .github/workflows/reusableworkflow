@@ -1,7 +1,7 @@
 name :Reusable workflow 1
 
 on :
- workflow_call:
+on: [push]
 
 jobs:
   ru1-job1:
