@@ -1,6 +1,8 @@
 name :Reusable workflow 1
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
 
 jobs:
   ru1-job1:
