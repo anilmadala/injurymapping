@@ -5,5 +5,5 @@ on :
 
 jobs:
   call-workflow-in-localrepo:
-   uses : ./.github/workflows/reusable-workflow-1.yml
+   uses : ./.github/workflows/reusableworkflow.yml
    
