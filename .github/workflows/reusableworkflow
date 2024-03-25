@@ -5,9 +5,9 @@ on:
     branches: [ master ]
 
 jobs:
-  Demo1:
+  notify-slack-on-start:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name : write someting to log
-          echo " I am Anil"
+          echo "I am Anil"
