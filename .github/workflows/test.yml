@@ -18,5 +18,3 @@ jobs:
         LOIS_PASSPHRASE_QS: ${{ secrets.LOIS_PASSPHRASE_QS }}
       run: |
         echo KEY: '${{secrets.LOIS_CLIENT_ID_QS}}'
-        twine check dist/*
-        twine upload --verbose --skip-existing dist/*
