@@ -15,7 +15,7 @@ jobs:
  
       - name: Set up environment
         run: |
-          if [ "${{ environment }}" == "Test" ]; then
+          #if [ "${{ environment }}" == "Test" ]; then
             echo "Setting up QS environment..."
           - name: Publish to Test PyPI
             env:
