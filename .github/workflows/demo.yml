@@ -4,6 +4,11 @@ on :
  workflow_dispatch:
 
 jobs:
+  SmokeTest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
   call-workflow-in-localrepo:
    uses : ./.github/workflows/reusableworkflow.yml
    
