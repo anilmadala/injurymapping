@@ -1,5 +1,4 @@
-name: Environment Specific Workflow
- 
+name: My Workflow
 on:
   push:
     branches:
@@ -12,7 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
- 
       - name: Set up environment
         run: |
             echo "Setting up QS environment..."
@@ -23,6 +21,3 @@ jobs:
                LOIS_PASSPHRASE_QS: ${{ secrets.LOIS_PASSPHRASE_QS }};
                run: echo "LOIS_CLIENT_ID_QS"
                # Commands to set up development environment
-      
- 
-
