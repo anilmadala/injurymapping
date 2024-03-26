@@ -13,7 +13,7 @@ jobs:
     # Some more steps here ...
     - name: Publish to Test PyPI
       run: |
-          if [ "${{ environment }}" == "QSEnv" ]; then
+          if [ environment == "QSEnv" ]; then
            env:
               LOIS_CLIENT_ID_QS: ${{ secrets.LOIS_CLIENT_ID_QS }}
               LOIS_CLIENT_SECRET_QS: ${{ secrets.LOIS_CLIENT_SECRET_QS }}
