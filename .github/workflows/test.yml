@@ -13,4 +13,4 @@ jobs:
       - name: Use a secret
         env:
           SECRET_VALUE: ${{ secrets.LOIS_CLIENT_ID_QS }}
-        run: echo ${{SECRET_VALUE}}
+        run: echo '${{SECRET_VALUE}}'
