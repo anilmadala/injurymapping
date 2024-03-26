@@ -21,8 +21,7 @@ jobs:
                LOIS_CLIENT_ID_QS: ${{ secrets.LOIS_CLIENT_ID_QS }}
                LOIS_CLIENT_SECRET_QS: ${{ secrets.LOIS_CLIENT_SECRET_QS }}
                LOIS_PASSPHRASE_QS: ${{ secrets.LOIS_PASSPHRASE_QS }};
-                 echo LOIS_CLIENT_ID_QS
-                 echo LOIS_CLIENT_ID_QS
+               run: echo "LOIS_CLIENT_ID_QS"
                # Commands to set up development environment
       
  
