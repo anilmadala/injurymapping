@@ -6,12 +6,11 @@ on:
       - master
  
 jobs:
-  build:
+  publish:
+    environment: Test    # <--- /!\ Here is the link to the environment
     runs-on: ubuntu-latest
  
-    strategy:
-      matrix:
-        environment: [QSEnv, TestEnv]
+  
  
     steps:
       - name: Checkout code
@@ -19,26 +18,17 @@ jobs:
  
       - name: Set up environment
         run: |
-          if [ "${{ matrix.environment }}" == "QSEnv" ]; then
+          if [ "${{ environment }}" == "Test" ]; then
             echo "Setting up QS environment..."
+          - name: Publish to Test PyPI
+            env:
+            LOISTESTENVCLIENTID: ${{ secrets.LOISTESTENVCLIENTID }}
+           LOISTESTENVCLIENTSECRET: ${{ secrets.LOISTESTENVCLIENTSECRET }}
+          LOISTESTENVPASSPHRASE: ${{ secrets.LOISTESTENVPASSPHRASE }}
+          echo "Setting up QS environment..."
+          echo "Setting up QS environment..."
+          echo "Setting up QS environment..."
             # Commands to set up development environment
-          elif [ "${{ matrix.environment }}" == "TestEnv" ]; then
-            echo "Setting up Test environment..."
-            # Commands to set up production environment
-          else
-            echo "Unknown environment"
-            exit 1
-          fi
+      
  
-      - name: Run tests
-        run: |
-          if [ "${{ matrix.environment }}" == "QSEnv" ]; then
-            echo "Running QS tests..."
-            # Commands to run development tests
-          elif [ "${{ matrix.environment }}" == "TestEnv" ]; then
-            echo "Running test tests..."
-            # Commands to run production tests
-          else
-            echo "Unknown environment"
-            exit 1
-          fi
+
