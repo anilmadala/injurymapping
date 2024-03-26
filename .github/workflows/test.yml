@@ -12,9 +12,19 @@ jobs:
     - uses: actions/checkout@v2
     # Some more steps here ...
     - name: Publish to Test PyPI
-      env:
-        LOIS_CLIENT_ID_QS: ${{ secrets.LOIS_CLIENT_ID_QS }}
-        LOIS_CLIENT_SECRET_QS: ${{ secrets.LOIS_CLIENT_SECRET_QS }}
-        LOIS_PASSPHRASE_QS: ${{ secrets.LOIS_PASSPHRASE_QS }}
       run: |
-        echo KEY: '${{secrets.LOIS_CLIENT_ID_QS}}'
+          if [ "${{ environment }}" == "QSEnv" ]; then
+           env:
+              LOIS_CLIENT_ID_QS: ${{ secrets.LOIS_CLIENT_ID_QS }}
+              LOIS_CLIENT_SECRET_QS: ${{ secrets.LOIS_CLIENT_SECRET_QS }}
+              LOIS_PASSPHRASE_QS: ${{ secrets.LOIS_PASSPHRASE_QS }}
+             echo KEY: '${{secrets.LOIS_CLIENT_ID_QS}}'
+            echo "Setting up QS environment..."
+            # Commands to set up development environment
+          elif [ "${{ environment }}" == "TestEnv" ]; then
+          env:
+           LOISTESTENVCLIENTID: ${{ secrets.LOISTESTENVCLIENTID }}
+           LOISTESTENVCLIENTSECRET: ${{ secrets.LOISTESTENVCLIENTSECRET }}
+           LOISTESTENVPASSPHRASE: ${{ secrets.LOISTESTENVPASSPHRASE }}
+            echo "Setting up Test environment..."
+            echo KEY: '${{secrets.LOISTESTENVCLIENTID}}'
