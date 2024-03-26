@@ -15,17 +15,15 @@ jobs:
  
       - name: Set up environment
         run: |
-          #if [ "${{ environment }}" == "Test" ]; then
             echo "Setting up QS environment..."
-          - name: Publish to Test PyPI
-            env:
-            LOISTESTENVCLIENTID: ${{ secrets.LOISTESTENVCLIENTID }}
-           LOISTESTENVCLIENTSECRET: ${{ secrets.LOISTESTENVCLIENTSECRET }}
-          LOISTESTENVPASSPHRASE: ${{ secrets.LOISTESTENVPASSPHRASE }}
-          echo "Setting up QS environment..."
-          echo "Setting up QS environment..."
-          echo "Setting up QS environment..."
-            # Commands to set up development environment
+      - name: Publish to Test PyPI
+        env:
+               LOIS_CLIENT_ID_QS: ${{ secrets.LOIS_CLIENT_ID_QS }}
+               LOIS_CLIENT_SECRET_QS: ${{ secrets.LOIS_CLIENT_SECRET_QS }}
+               LOIS_PASSPHRASE_QS: ${{ secrets.LOIS_PASSPHRASE_QS }};
+                 echo LOIS_CLIENT_ID_QS
+                 echo LOIS_CLIENT_ID_QS
+               # Commands to set up development environment
       
  
 
