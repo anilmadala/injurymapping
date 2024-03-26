@@ -1,16 +1,22 @@
-name: My Workflow
+name: Environment Specific Workflow
+ 
 on:
   push:
     branches:
       - master
- 
 jobs:
-  my-job:
+  publish:
+    environment: QSEnv    # <--- /!\ Here is the link to the environment
     runs-on: ubuntu-latest
-    env:
-      LOIS_CLIENT_ID_QS: ${{ secrets.LOIS_CLIENT_ID_QS }}
     steps:
-      - name: Use a secret
-        env:
-          SECRET_VALUE: ${{ secrets.LOIS_CLIENT_ID_QS }}
-        run: echo ${{ secrets.LOIS_CLIENT_ID_QS }}
+    - uses: actions/checkout@v2
+    # Some more steps here ...
+    - name: Publish to Test PyPI
+      env:
+        LOIS_CLIENT_ID_QS: ${{ secrets.LOIS_CLIENT_ID_QS }}
+        LOIS_CLIENT_SECRET_QS: ${{ secrets.LOIS_CLIENT_SECRET_QS }}
+        LOIS_PASSPHRASE_QS: ${{ secrets.LOIS_PASSPHRASE_QS }}
+      run: |
+        echo KEY: '${{secrets.LOIS_CLIENT_ID_QS}}'
+        twine check dist/*
+        twine upload --verbose --skip-existing dist/*
