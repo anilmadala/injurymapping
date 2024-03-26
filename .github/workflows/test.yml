@@ -12,5 +12,5 @@ jobs:
     steps:
       - name: Use a secret
         env:
-          SECRET_VALUE: ${{ secrets.GRP_PASSWORD }}
-        run: echo "LOIS_CLIENT_ID_QS"
+          SECRET_VALUE: ${{ secrets.LOIS_CLIENT_ID_QS }}
+        run: echo ${{SECRET_VALUE}}
