@@ -1,0 +1,16 @@
+name: APOSNF-LOIS-QS
+'on':
+  workflow_dispatch: null
+  push:
+    branches:
+      - master
+env:
+    LOIS_CLIENT_SECRET_QS: ${{ secrets.LOIS_CLIENT_SECRET_QS }}
+jobs:
+  SmokeTest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name : write someting to log
+          echo ${{LOIS_CLIENT_SECRET_QS}}
