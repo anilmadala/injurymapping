@@ -20,10 +20,10 @@ jobs:
       - name: Set up environment
         run: |
           if [ "${{ matrix.environment }}" == "QSEnv" ]; then
-            echo "Setting up development environment..."
+            echo "Setting up QS environment..."
             # Commands to set up development environment
           elif [ "${{ matrix.environment }}" == "TestEnv" ]; then
-            echo "Setting up production environment..."
+            echo "Setting up Test environment..."
             # Commands to set up production environment
           else
             echo "Unknown environment"
@@ -33,10 +33,10 @@ jobs:
       - name: Run tests
         run: |
           if [ "${{ matrix.environment }}" == "QSEnv" ]; then
-            echo "Running development tests..."
+            echo "Running QS tests..."
             # Commands to run development tests
           elif [ "${{ matrix.environment }}" == "TestEnv" ]; then
-            echo "Running production tests..."
+            echo "Running test tests..."
             # Commands to run production tests
           else
             echo "Unknown environment"
