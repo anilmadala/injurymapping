@@ -4,27 +4,49 @@ on:
   push:
     branches:
       - master
+ 
 jobs:
-  publish:
-    environment: QSEnv    # <--- /!\ Here is the link to the environment
+  build:
     runs-on: ubuntu-latest
+ 
+    strategy:
+      matrix:
+        environment: [development, production]
+ 
     steps:
-    - uses: actions/checkout@v2
-    # Some more steps here ...
-    - name: Publish to Test PyPI
-      run: |
-          if [ "${{ environment }}" == "QSEnv" ]; then
-           env:
-              LOIS_CLIENT_ID_QS: ${{ secrets.LOIS_CLIENT_ID_QS }}
-              LOIS_CLIENT_SECRET_QS: ${{ secrets.LOIS_CLIENT_SECRET_QS }}
-              LOIS_PASSPHRASE_QS: ${{ secrets.LOIS_PASSPHRASE_QS }}
-             echo KEY: '${{secrets.LOIS_CLIENT_ID_QS}}'
-            echo "Setting up QS environment..."
+      - name: Checkout code
+        uses: actions/checkout@v2
+ 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+ 
+      - name: Install dependencies
+        run: npm install
+ 
+      - name: Set up environment
+        run: |
+          if [ "${{ matrix.environment }}" == "development" ]; then
+            echo "Setting up development environment..."
             # Commands to set up development environment
-          elif [ "${{ environment }}" == "TestEnv" ]; then
-          env:
-           LOISTESTENVCLIENTID: ${{ secrets.LOISTESTENVCLIENTID }}
-           LOISTESTENVCLIENTSECRET: ${{ secrets.LOISTESTENVCLIENTSECRET }}
-           LOISTESTENVPASSPHRASE: ${{ secrets.LOISTESTENVPASSPHRASE }}
-            echo "Setting up Test environment..."
-            echo KEY: '${{secrets.LOISTESTENVCLIENTID}}'
+          elif [ "${{ matrix.environment }}" == "production" ]; then
+            echo "Setting up production environment..."
+            # Commands to set up production environment
+          else
+            echo "Unknown environment"
+            exit 1
+          fi
+ 
+      - name: Run Cypress tests
+        run: |
+          if [ "${{ matrix.environment }}" == "development" ]; then
+            echo "Running development tests..."
+            npx cypress run --config baseUrl=http://localhost:8000
+          elif [ "${{ matrix.environment }}" == "production" ]; then
+            echo "Running production tests..."
+            npx cypress run --config baseUrl=https://api.example.com
+          else
+            echo "Unknown environment"
+            exit 1
+          fi
