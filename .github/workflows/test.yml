@@ -1,49 +1,25 @@
-name: Environment Specific Workflow
- 
-on:
+name: APOSNF-LOIS-QS
+'on':
+  workflow_dispatch: null
   push:
     branches:
-      - master
- 
+      - main
+permissions:
+  contents: write
+env:
+ env: 'dev'
 jobs:
-  build:
+ SmokeTest:
     runs-on: ubuntu-latest
- 
-    strategy:
-      matrix:
-        environment: [QSEnv, TestEnv]
- 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
- 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
- 
-      - name: Install dependencies
-        run: npm install
- 
-      - name: Set up environment
-        run: |
-          if [ "${{ matrix.environment }}" == "QSEnv" ]; then
-            echo "Setting up development environment..."
-            # Commands to set up development environment
-          elif [ "${{ matrix.environment }}" == "TestEnv" ]; then
-            echo "Setting up production environment..."
-            # Commands to set up production environment
-          else
-            echo "Unknown environment"
-            exit 1
-          fi
- 
-      - name: Run Cypress tests
-        run: |
-          if [ "${{ matrix.environment }}" == "QSEnv" ]; then
-            echo "Running development tests..."
-          elif [ "${{ matrix.environment }}" == "TestEnv" ]; then
-            echo "Running production tests..."
+      - name: Call environment-specific workflow
+           if ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+         run:|
+          if [ $env == 'dev' ]; then
+            run:|
+          echo "I am Anil"
+          elif [ $env == 'test' ]; then
+            ./.github/workflows/test.yml
           else
             echo "Unknown environment"
             exit 1
