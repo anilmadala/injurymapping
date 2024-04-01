@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call environment-specific workflow
-           if ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-         run:|
+        run: |
           if [ $env == 'dev' ]; then
             run:|
           echo "I am Anil"
