@@ -18,7 +18,8 @@ jobs:
             run:|
           echo "I am Anil"
           elif [ $env == 'test' ]; then
-            ./.github/workflows/test.yml
+           run:|
+          echo "DemoHelp"
           else
             echo "Unknown environment"
             exit 1
