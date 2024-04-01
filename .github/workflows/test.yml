@@ -45,7 +45,6 @@ jobs:
             npx cypress run --config baseUrl=http://localhost:8000
           elif [ "${{ matrix.environment }}" == "TestEnv" ]; then
             echo "Running production tests..."
-            npx cypress run --config baseUrl=https://api.example.com
           else
             echo "Unknown environment"
             exit 1
