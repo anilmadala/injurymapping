@@ -42,7 +42,6 @@ jobs:
         run: |
           if [ "${{ matrix.environment }}" == "QSEnv" ]; then
             echo "Running development tests..."
-            npx cypress run --config baseUrl=http://localhost:8000
           elif [ "${{ matrix.environment }}" == "TestEnv" ]; then
             echo "Running production tests..."
           else
