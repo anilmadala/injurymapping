@@ -1,7 +1,6 @@
 name : my starter workflow
-
 on:
- workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   call-workflow-in-localrepo:
