@@ -15,7 +15,7 @@ jobs:
       - name: Call environment-specific workflow
         run: |
           if [ $env == 'dev' ]; then
-           ./.github/workflows/reusableworkflow.yml
+            /.github/workflows
           elif [ $env == 'test' ]; then
            run:|
           echo "DemoHelp"
