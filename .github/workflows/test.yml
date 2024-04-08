@@ -19,7 +19,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-            repository:{owner}/{repo}
+            repository:{repo}
           workflow: reusableworkflow.yml  # Change this to your actual workflow file name
           ref: master
           inputs: |
