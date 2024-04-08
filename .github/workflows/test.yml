@@ -15,7 +15,8 @@ jobs:
       - name: Call environment-specific workflow
         run: |
           if [ $env == 'dev' ]; then
-          call-workflow-in-localrepo:
+          - name: Pass the received secret to an action
+          #call-workflow-in-localrepo:
            uses : ./.github/workflows/reusableworkflow.yml
           elif [ $env == 'test' ]; then
            run:|
