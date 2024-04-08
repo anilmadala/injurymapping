@@ -15,8 +15,6 @@ jobs:
       - name: Call environment-specific workflow
         run: |
           if [ $env == 'dev' ]; then
-            run:|
-          jobs:
           call-workflow-in-localrepo:
            uses : ./.github/workflows/reusableworkflow.yml
           elif [ $env == 'test' ]; then
