@@ -1,27 +1,31 @@
 name: APOSNF-LOIS-QS
+ 
 on:
-   workflow_dispatch:
-   push:
+  workflow_dispatch:
+  push:
     branches:
       - master
+ 
 permissions:
   contents: write
+ 
 env:
- env: 'test'
+  env: 'test'
+ 
 jobs:
- SmokeTest:
+  SmokeTest:
     runs-on: ubuntu-latest
     steps:
       - name: Call environment-specific workflow
         run: |
-          if [ $env == 'dev' ]; then
-           jobs:
-            call-workflow-in-localrepo:
-             uses : ./.github/workflows/reusableworkflow.yml
-          elif [ $env == 'test' ]; then
-           jobs:
-            call-workflow-in-localrepo:
-             uses : ./.github/workflows/QS.yml
+          if [[ $env == 'dev' ]]; then
+            echo "Using dev workflow"
+            # Use the correct path to your dev workflow
+            uses: ./.github/workflows/reusableworkflow.yml
+          elif [[ $env == 'test' ]]; then
+            echo "Using test workflow"
+            # Use the correct path to your test workflow
+            uses: ./.github/workflows/QS.yml
           else
             echo "Unknown environment"
             exit 1
