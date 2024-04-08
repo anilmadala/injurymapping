@@ -1,7 +1,7 @@
 name: APOSNF-LOIS-QS
-'on':
-  workflow_dispatch: null
-  push:
+on:
+   workflow_dispatch:
+   push:
     branches:
       - master
 permissions:
