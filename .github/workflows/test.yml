@@ -18,8 +18,8 @@ jobs:
       - name: Trigger environment-specific workflow
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-            repository:{repo}
+          token: ${{ secrets.WORKFLOW_DISPATCH_TOKEN }}
+           repository:{owner}/{repo}
           workflow: reusableworkflow.yml  # Change this to your actual workflow file name
           ref: master
           inputs: |
