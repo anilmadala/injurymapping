@@ -1,26 +1,26 @@
 name: APOSNF-LOIS-QS
- 
-on:
-  workflow_dispatch:
-    inputs:
-      env:
-        description: 'Environment to run: dev or test'
-        required: true
-        default: 'dev'
- 
+'on':
+  workflow_dispatch: null
+  push:
+    branches:
+      - main
 permissions:
   contents: write
- 
+env:
+ env: 'dev'
 jobs:
-  SmokeTest:
+ SmokeTest:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger environment-specific workflow
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.WORKFLOW_DISPATCH_TOKEN }}
-           repository:{owner}/{repo}
-          workflow: reusableworkflow.yml  # Change this to your actual workflow file name
-          ref: master
-          inputs: |
-            env: ${{ github.event.inputs.env }}
+      - name: Call environment-specific workflow
+        run: |
+          if [ $env == 'dev' ]; then
+            run:|
+          echo "I am Anil"
+          elif [ $env == 'test' ]; then
+           run:|
+          echo "DemoHelp"
+          else
+            echo "Unknown environment"
+            exit 1
+          fi
