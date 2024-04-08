@@ -7,7 +7,7 @@ name: APOSNF-LOIS-QS
 permissions:
   contents: write
 env:
- env: 'test'
+ env: 'dev'
 jobs:
  SmokeTest:
     runs-on: ubuntu-latest
