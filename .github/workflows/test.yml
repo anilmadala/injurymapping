@@ -17,16 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call environment-specific workflow
-        run: |
-          if [[ $env == 'dev' ]]; then
-            echo "Using dev workflow"
-            # Use the correct path to your dev workflow
-            uses: ./.github/workflows/reusableworkflow.yml
-          elif [[ $env == 'test' ]]; then
-            echo "Using test workflow"
-            # Use the correct path to your test workflow
-            uses: ./.github/workflows/QS.yml
-          else
-            echo "Unknown environment"
-            exit 1
-          fi
+        if: $env == 'dev'
+        uses: ./.github/workflows/reusableworkflow.yml
+ 
+      - name: Call environment-specific workflow
+        if: $env == 'test'
+        uses: ./.github/workflows/QS.yml
