@@ -15,7 +15,7 @@ env:
 jobs:
   SmokeTest:
     runs-on: ubuntu-latest
-    if: ${{env.ENVIRONMENT == 'test'}}
+    if: ${{ env.ENVIRONMENT == 'test' }}
     steps:
       - name: Call environment-specific workflow
         uses: ./.github/workflows/reusableworkflow.yml 
