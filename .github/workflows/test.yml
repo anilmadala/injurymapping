@@ -16,8 +16,7 @@ jobs:
         run: |
           if [ $env == 'dev' ]; then
             run:|
-          echo "Main file"
-          include: reusableworkflow.yml
+          echo "cond succ"
           elif [ $env == 'test' ]; then
            run:|
           echo "DemoHelp"
