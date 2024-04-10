@@ -17,7 +17,7 @@ jobs:
           if [ $env == 'dev' ]; then
             run:|
           echo "cond succ"
-          uses : $GITHUB_WORKFLOW/.github/workflows/reusableworkflow.yml
+          uses : $GITHUB_WORKSPACE/.github/workflows/reusableworkflow.yml
           elif [ $env == 'test' ]; then
            run:|
           echo "DemoHelp"
