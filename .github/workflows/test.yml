@@ -12,6 +12,8 @@ jobs:
  SmokeTest:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Call environment-specific workflow
         run: |
           if [ $env == 'dev' ]; then
