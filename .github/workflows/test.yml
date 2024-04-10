@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ ENVIRONMENT == 'test' }}
     steps:
-      - name: Call environment-specific workflow
+      - name: Checkout
         uses: ./.github/workflows/reusableworkflow.yml 
         
          
