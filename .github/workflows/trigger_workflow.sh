@@ -3,7 +3,7 @@
 REPO_OWNER="anilmadala94@gmail.com"
 REPO_NAME="injurymapping"
 WORKFLOW_NAME="reusableworkflow.yml"
-TOKEN="your_personal_access_token"
+TOKEN="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"
  
 curl -X POST \
   -u "${REPO_OWNER}:${TOKEN}" \
