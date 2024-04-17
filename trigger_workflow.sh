@@ -1,7 +1,7 @@
 #!/bin/bash
  
 REPO_OWNER="anilmadala94@gmail.com"
-REPO_NAME="injurymapping"
+REPO_NAME="https://github.com/anilmadala/injurymapping"
 WORKFLOW_NAME="reusableworkflow.yml"
 
  
