@@ -1,19 +1,25 @@
+name: Choice Parameter Workflow
+ 
 on:
-  workflow_call:
-    secrets:
-      QS_Credentials:
-        description: >
-          QS credentials which will be used for test execution on QS ENV.
-        required: true
-      TEST_Credentials:
-        description: >
-          TEST credentials which will be used for test execution on TEST ENV.
-        required: true
   workflow_dispatch:
     inputs:
-      ENVIRONMENT:
+      environment:
         description: 'Select the environment'
         required: true
+        default: 'dev'
         options:
-          - TEST
-          - QS
+          - dev
+          - staging
+          - production
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+ 
+      - name: Deploy to selected environment
+        run: |
+          echo "Deploying to ${{ github.event.inputs.environment }} environment"
