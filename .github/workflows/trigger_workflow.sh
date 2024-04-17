@@ -1,8 +1,8 @@
 #!/bin/bash
  
-REPO_OWNER="your_username"
-REPO_NAME="your_repository"
-WORKFLOW_NAME="workflow_name.yml"
+REPO_OWNER="anilmadala94@gmail.com"
+REPO_NAME="injurymapping"
+WORKFLOW_NAME="reusableworkflow.yml"
 TOKEN="your_personal_access_token"
  
 curl -X POST \
