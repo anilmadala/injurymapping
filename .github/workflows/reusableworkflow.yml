@@ -1,8 +1,8 @@
 name: Reusable workflow 1
-on: 
-  workflow_call:
+on:
+  workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [ feature ]
 
 jobs:
   ru1-job1:
