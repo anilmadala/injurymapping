@@ -12,7 +12,7 @@ on:
           - staging
           - production
 env: 
-   TOKEN: ${{secret.TRIGGER_TOKEN}}
+   TOKEN: ${{secrets.TRIGGER_TOKEN}}
 jobs:
   build:
     runs-on: ubuntu-latest
