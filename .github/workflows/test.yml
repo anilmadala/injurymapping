@@ -1,18 +1,25 @@
-name: APOSNF-LOIS-QS
+name: Choice Parameter Workflow
+ 
 on:
-  push:
   workflow_dispatch:
-permissions:
-  contents: write
-env:
-  ENVIRONMENT: 'dev'
+    inputs:
+      environment: 
+        description: 'Select the environment'
+        required: true
+        default: 'dev'
+        options:
+          - dev
+          - staging
+          - production
+ 
 jobs:
-  SmokeTest:
+  build:
     runs-on: ubuntu-latest
+ 
     steps:
-      - uses: actions/checkout@v4
-      - name: Call environment-specific workflow
-        if: env.ENVIRONMENT == 'dev'
-        uses: ./.github/workflows/reusableworkflow.yml
-      - name: Job Done
-        run: echo "Done"
+      - name: Check out repository
+        uses: actions/checkout@v2
+ 
+      - name: Deploy to selected environment
+        run: |
+          echo "Deploying to ${{ github.event.inputs.environment }} environment"
