@@ -5,18 +5,21 @@ REPO_NAME="injurymapping"
 QS_WORKFLOW_NAME="QS.yml"
 TEST_WORKFLOW_NAME="reusableworkflow.yml"
 
-if [ "$ENVIRONMENT" = 'dev' ];
-then
+if [ "$ENVIRONMENT" = 'dev' ]; then
+echo "Running tests on QS Environment"
 curl -X POST \
   -u "${REPO_OWNER}:${TOKEN}" \
   -H "Accept: application/vnd.github.v3+json" \
   "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${QS_WORKFLOW_NAME}/dispatches" \
   -d '{"ref":"master"}'
-  elif [ $env = 'staging' ]
- then
+  elif [ $ENVIRONMENT = 'staging' ]; then
+  echo "Running tests on Staging Environment"
   curl -X POST \
   -u "${REPO_OWNER}:${TOKEN}" \
   -H "Accept: application/vnd.github.v3+json" \
   "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${TEST_WORKFLOW_NAME}/dispatches" \
   -d '{"ref":"master"}'
+  else 
+  echo "Unspecified Environment : $ENVIRONMENT"
+  exit 1
   fi
