@@ -5,7 +5,7 @@ REPO_NAME="injurymapping"
 QS_WORKFLOW_NAME="QS.yml"
 TEST_WORKFLOW_NAME="reusableworkflow.yml"
 
-if [ "${github.event.inputs.environment}" = 'dev' ];
+if [ "$ENVIRONMENT" = 'dev' ];
 then
 curl -X POST \
   -u "${REPO_OWNER}:${TOKEN}" \
