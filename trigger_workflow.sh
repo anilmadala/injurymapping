@@ -4,6 +4,7 @@ REPO_OWNER="anilmadala"
 REPO_NAME="injurymapping"
 QS_WORKFLOW_NAME="QS.yml"
 TEST_WORKFLOW_NAME="reusableworkflow.yml"
+ENVIRONMENT = ${{ github.event.inputs.environment }} 
 
 if [ "$ENVIRONMENT" = 'dev' ]; then
 echo "Running tests on QS Environment"
