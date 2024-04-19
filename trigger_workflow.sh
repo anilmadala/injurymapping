@@ -7,14 +7,14 @@ TEST_WORKFLOW_NAME="reusableworkflow.yml"
 #ENVIRONMENT ="$ENVIRONMENT"
 echo "Selected Envronment is: $ENVIRONMENT"
 
-if [ "$ENVIRONMENT" = 'dev' ]; then
+if [ "$ENVIRONMENT" = 'QS' ]; then
 echo "Running tests on QS Environment"
 curl -X POST \
   -u "${REPO_OWNER}:${TOKEN}" \
   -H "Accept: application/vnd.github.v3+json" \
   "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${QS_WORKFLOW_NAME}/dispatches" \
   -d '{"ref":"master"}'
-  elif [ $ENVIRONMENT = 'staging' ]; then
+  elif [ $ENVIRONMENT = 'Test' ]; then
   echo "Running tests on Staging Environment"
   curl -X POST \
   -u "${REPO_OWNER}:${TOKEN}" \
