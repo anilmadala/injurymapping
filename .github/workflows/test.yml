@@ -6,11 +6,10 @@ on:
       environment:
         description: 'Select the environment'
         required: true
-        default: 'dev'
+        default: 'Test'
         options:
-          - dev
-          - staging
-          - production
+          - Test
+          - QS
 env: 
    TOKEN: ${{secrets.TRIGGER_TOKEN}}
 jobs:
